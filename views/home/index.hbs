@@ -1,0 +1,15 @@
+  {{title}}
+  <p> Welcome to {{title}}</p>
+{{#markdown}}
+# this is H1
+<p>this</p>
+## this is {{title}}
+~~~
+\{{title}} is a code
+~~~
+{{/markdown}}
+{{#extend "scripts"}}
+  <script type='text/javascript'>
+      //alert('abc');
+  </script>
+{{/extend}}
