@@ -1,12 +1,19 @@
-  {{title}}
+{{title}}
   <p> Welcome to {{title}}</p>
 {{#markdown}}
+    # you can use markdown here
 # this is H1
 <p>this</p>
 ## this is {{title}}
 ~~~
 \{{title}} is a code
 ~~~
+col | Item | Value
+---- | :---------: | ------:
+col1 | Computer | $1600
+col2 | Phone | $12
+col3 | Pipe | $1
+
 {{/markdown}}
 {{#extend "scripts"}}
   <script type='text/javascript'>

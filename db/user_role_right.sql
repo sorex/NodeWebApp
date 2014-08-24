@@ -1,98 +1,110 @@
 CREATE TABLE `users` (
-`UUID` char(36) NOT NULL,
+`ID` char(36) NOT NULL,
 `Email` varchar(200) NOT NULL,
 `Password` varchar(200) NOT NULL,
 `RealName` varchar(200) NOT NULL,
 `Status` int NOT NULL,
 `CreateTime` datetime NOT NULL,
-PRIMARY KEY (`UUID`) 
+PRIMARY KEY (`ID`) 
 );
 
 CREATE TABLE `user_infos` (
-`UUID` char(36) NOT NULL,
+`ID` char(36) NOT NULL,
 `NowLoginTime` datetime NOT NULL,
 `LastLoginTime` datetime NOT NULL,
-PRIMARY KEY (`UUID`) 
+PRIMARY KEY (`ID`) 
 );
 
 CREATE TABLE `roles` (
-`UUID` char(36) NOT NULL,
+`ID` char(36) NOT NULL,
 `Name` varchar(200) NOT NULL,
 `Description` varchar(2000) NOT NULL,
 `Status` int NOT NULL,
-PRIMARY KEY (`UUID`) 
+PRIMARY KEY (`ID`) 
 );
 
 CREATE TABLE `rights` (
-`UUID` char(36) NOT NULL,
+`ID` char(36) NOT NULL,
 `Name` varchar(200) NOT NULL,
 `Description` varchar(2000) NOT NULL,
 `Status` int NOT NULL,
-PRIMARY KEY (`UUID`) 
+PRIMARY KEY (`ID`) 
 );
 
 CREATE TABLE `user_roles` (
-`UUID` char(36) NOT NULL,
+`ID` char(36) NOT NULL,
 `userID` char(36) NOT NULL,
 `roleID` char(36) NOT NULL,
-PRIMARY KEY (`UUID`) 
+PRIMARY KEY (`ID`) 
 );
 
 CREATE TABLE `role_rights` (
-`UUID` char(36) NOT NULL,
+`ID` char(36) NOT NULL,
 `roleID` char(36) NOT NULL,
 `rightID` char(36) NOT NULL,
-PRIMARY KEY (`UUID`) 
+PRIMARY KEY (`ID`) 
 );
 
 CREATE TABLE `user_rights` (
-`UUID` char(36) NOT NULL,
+`ID` char(36) NOT NULL,
 `userID` char(36) NOT NULL,
 `rightID` char(36) NOT NULL,
-PRIMARY KEY (`UUID`) 
+PRIMARY KEY (`ID`) 
 );
 
 CREATE TABLE `groups` (
-`UUID` char(36) NOT NULL,
+`ID` char(36) NOT NULL,
 `Name` varchar(200) NOT NULL,
 `Description` varchar(2000) NOT NULL,
 `Status` int NOT NULL,
-PRIMARY KEY (`UUID`) 
+PRIMARY KEY (`ID`) 
 );
 
 CREATE TABLE `group_roles` (
-`UUID` char(36) NOT NULL,
+`ID` char(36) NOT NULL,
 `groupID` char(36) NOT NULL,
 `roleID` char(36) NOT NULL,
-PRIMARY KEY (`UUID`) 
+PRIMARY KEY (`ID`) 
 );
 
 CREATE TABLE `group_users` (
-`UUID` char(36) NOT NULL,
+`ID` char(36) NOT NULL,
 `groupID` char(36) NOT NULL,
 `userID` char(36) NOT NULL,
-PRIMARY KEY (`UUID`) 
+PRIMARY KEY (`ID`) 
 );
 
 CREATE TABLE `group_rights` (
-`UUID` char(36) NOT NULL,
+`ID` char(36) NOT NULL,
 `groupID` char(36) NOT NULL,
 `rightID` char(36) NOT NULL,
-PRIMARY KEY (`UUID`) 
+PRIMARY KEY (`ID`) 
+);
+
+CREATE TABLE `right_logs` (
+`ID` char(36) NOT NULL,
+`OperatorID` char(36) NOT NULL,
+`TableName` varchar(200) NOT NULL,
+`RowID` char(36) NOT NULL,
+`Action` int NOT NULL COMMENT '1：增\r\n2：删\r\n3：改',
+`Description` varchar(2000) NOT NULL,
+`CreateTime` datetime NOT NULL,
+PRIMARY KEY (`ID`) 
 );
 
 
-ALTER TABLE `user_infos` ADD FOREIGN KEY (`UUID`) REFERENCES `users` (`UUID`);
-ALTER TABLE `user_rights` ADD FOREIGN KEY (`userID`) REFERENCES `users` (`UUID`);
-ALTER TABLE `user_rights` ADD FOREIGN KEY (`rightID`) REFERENCES `rights` (`UUID`);
-ALTER TABLE `role_rights` ADD FOREIGN KEY (`roleID`) REFERENCES `roles` (`UUID`);
-ALTER TABLE `role_rights` ADD FOREIGN KEY (`rightID`) REFERENCES `rights` (`UUID`);
-ALTER TABLE `user_roles` ADD FOREIGN KEY (`userID`) REFERENCES `users` (`UUID`);
-ALTER TABLE `user_roles` ADD FOREIGN KEY (`roleID`) REFERENCES `roles` (`UUID`);
-ALTER TABLE `group_rights` ADD FOREIGN KEY (`groupID`) REFERENCES `groups` (`UUID`);
-ALTER TABLE `group_rights` ADD FOREIGN KEY (`rightID`) REFERENCES `rights` (`UUID`);
-ALTER TABLE `group_users` ADD FOREIGN KEY (`groupID`) REFERENCES `groups` (`UUID`);
-ALTER TABLE `group_users` ADD FOREIGN KEY (`userID`) REFERENCES `users` (`UUID`);
-ALTER TABLE `group_roles` ADD FOREIGN KEY (`groupID`) REFERENCES `groups` (`UUID`);
-ALTER TABLE `group_roles` ADD FOREIGN KEY (`roleID`) REFERENCES `roles` (`UUID`);
+ALTER TABLE `user_infos` ADD CONSTRAINT `user_infos_users_fkid` FOREIGN KEY (`ID`) REFERENCES `users` (`ID`);
+ALTER TABLE `user_rights` ADD CONSTRAINT `user_rights_users_fkid` FOREIGN KEY (`userID`) REFERENCES `users` (`ID`);
+ALTER TABLE `user_rights` ADD CONSTRAINT `user_rights_rights_fkid` FOREIGN KEY (`rightID`) REFERENCES `rights` (`ID`);
+ALTER TABLE `role_rights` ADD CONSTRAINT `role_rights_roles_fkid` FOREIGN KEY (`roleID`) REFERENCES `roles` (`ID`);
+ALTER TABLE `role_rights` ADD CONSTRAINT `role_rights_rights_fkid` FOREIGN KEY (`rightID`) REFERENCES `rights` (`ID`);
+ALTER TABLE `user_roles` ADD CONSTRAINT `user_roles_users_fkid` FOREIGN KEY (`userID`) REFERENCES `users` (`ID`);
+ALTER TABLE `user_roles` ADD CONSTRAINT `user_roles_roles_fkid` FOREIGN KEY (`roleID`) REFERENCES `roles` (`ID`);
+ALTER TABLE `group_rights` ADD CONSTRAINT `group_rights_groups_fkid` FOREIGN KEY (`groupID`) REFERENCES `groups` (`ID`);
+ALTER TABLE `group_rights` ADD CONSTRAINT `group_rights_rights_fkid` FOREIGN KEY (`rightID`) REFERENCES `rights` (`ID`);
+ALTER TABLE `group_users` ADD CONSTRAINT `group_users_groups_fkid` FOREIGN KEY (`groupID`) REFERENCES `groups` (`ID`);
+ALTER TABLE `group_users` ADD CONSTRAINT `group_users_users_fkid` FOREIGN KEY (`userID`) REFERENCES `users` (`ID`);
+ALTER TABLE `group_roles` ADD CONSTRAINT `group_roles_groups_fkid` FOREIGN KEY (`groupID`) REFERENCES `groups` (`ID`);
+ALTER TABLE `group_roles` ADD CONSTRAINT `group_roles_roles_fkid` FOREIGN KEY (`roleID`) REFERENCES `roles` (`ID`);
+ALTER TABLE `right_logs` ADD CONSTRAINT `right_logs_users_fkid` FOREIGN KEY (`OperatorID`) REFERENCES `users` (`ID`);
 

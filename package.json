@@ -1,29 +1,29 @@
 {
-    "author": "Jasper Xu",
-    "name": "NodeWebApp",
-    "description": "A Demo for Node.js Web App",
-    "version": "0.0.1",
-    "private": true,
-    "repository": {
-        "url": "https://github.com/sorex/NodeWebApp"
-    },
-    "scripts": {
-        "start": "node ./bin/www"
-    },
-    "dependencies": {
-        "bignumber.js": "^1.4.1",
-        "body-parser": "~1.0.0",
-        "cookie-parser": "~1.0.1",
-        "debug": "~0.7.4",
-        "express": "~4.2.0",
-        "express-mysql-session": "^0.2.0",
-        "express-session": "^1.7.5",
-        "hbs": "^2.7.0",
-        "marked": "^0.3.2",
-        "morgan": "~1.0.0",
-        "mysql": "^2.4.2",
-        "node-uuid": "^1.4.1",
-        "socket.io": "^1.0.6",
-        "static-favicon": "~1.0.0"
-    }
+  "author": "Jasper Xu",
+  "name": "NodeWebApp",
+  "description": "A Demo for Node.js Web App",
+  "version": "0.0.1",
+  "private": true,
+  "repository": {
+    "url": "https://github.com/sorex/NodeWebApp"
+  },
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "bignumber.js": "^1.4.1",
+    "body-parser": "^1.6.5",
+    "cookie-parser": "^1.3.2",
+    "debug": "^0.7.4",
+    "express": "^4.8.5",
+    "express-mysql-session": "^0.2.0",
+    "express-session": "^1.7.6",
+    "hbs": "^2.7.0",
+    "marked": "^0.3.2",
+    "morgan": "^1.2.3",
+    "mysql": "^2.4.2",
+    "node-uuid": "^1.4.1",
+    "socket.io": "^1.0.6",
+    "static-favicon": "^1.0.2"
+  }
 }

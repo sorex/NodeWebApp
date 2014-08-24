@@ -1,4 +1,5 @@
 var express = require('express');
+var hbs = require('hbs');
 var router = express.Router();
 
 /* GET home page. */
@@ -8,8 +9,8 @@ router.get('/', function(req, res) {
 	res.render('home/index', {
 		title: 'Express',
 		user: {
-			id: 'abcd',
-			name: 'jasper'
+            ID: 'abcd',
+			RealName: 'jasper'
 		}
 	});
 });
